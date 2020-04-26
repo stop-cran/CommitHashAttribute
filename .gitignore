@@ -1,8 +1,6 @@
 # Visual Studio files #
 #######################
-*.suo
 *.csproj.user
 bin/
 obj/
-ClientBin/
-/packages
+.vs/

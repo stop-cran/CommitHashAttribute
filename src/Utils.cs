@@ -16,6 +16,15 @@ namespace CommitHash
                 .Single();
         }
 
+        public static string GetCommitHashSingle(string assemblyNameFilter, string assemblyNameExcludeFilter)
+        {
+            return AppDomain.CurrentDomain.GetAssemblies()
+                .Where(a => !a.IsDynamic && a.GetName().Name.Contains(assemblyNameFilter) && !a.GetName().Name.Contains(assemblyNameExcludeFilter))
+                .Select(a => a.GetCustomAttribute<CommitHashAttribute>()?.Value)
+                .Distinct()
+                .Single();
+        }
+
         public static Dictionary<string, string> GetCommitHashes(string assemblyNameFilter)
         {
             return AppDomain.CurrentDomain.GetAssemblies()
